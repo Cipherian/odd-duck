@@ -1,0 +1,99 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@Cipherian 
+codefellows
+/
+seattle-code-201n27
+Public
+Code
+Issues
+Pull requests
+1
+Actions
+Projects
+Wiki
+Security
+Insights
+seattle-code-201n27/configs/reset.css
+@DavidSouther
+DavidSouther Modernize reset.css
+Latest commit 512c24b 14 days ago
+ History
+ 1 contributor
+57 lines (48 sloc)  1.32 KB
+   
+:root {
+  --font-size: 100%;
+  --font-family: sans-serif;
+}
+
+:where(*) {
+  box-sizing: border-box;
+}
+
+:where(html) {
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+}
+
+:where(html, body, div, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+:where(a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, details) {
+  vertical-align: baseline;
+}
+
+:where(body) {
+  line-height: 1;
+}
+
+:where(dl, ol, ul) {
+  padding-left: revert;
+}
+
+:where(blockquote, q) {
+  quotes: none;
+}
+:where(blockquote:before, blockquote:after, q:before, q:after) {
+  content: "";
+  content: none;
+}
+
+:where(table) {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+:where(h1) {
+  font-size: 2rem;
+}
+:where(h2) {
+  font-size: 1.75rem;
+}
+:where(h3) {
+  font-size: 1.5rem;
+}
+:where(h4) {
+  font-size: 1.25rem;
+}
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
