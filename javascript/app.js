@@ -5,7 +5,6 @@ let oddDuckImages = ['pics/bag.jpg', 'pics/banana.jpg', 'pics/bathroom.jpg', 'pi
 
 
 let allProducts = [];
-let currentProducts = [];
 let maxVotes = 5;
 
 function Product(name, src) {
@@ -22,7 +21,7 @@ function createProduct() {
 }
 //render images
 Product.prototype.render = function (i) {
-  let img = document.getElementById(`image-${i}`);
+  let img = document.getElementById(`image${i}`);
   img.src = this.src;
 };
 
@@ -31,22 +30,22 @@ Product.prototype.render = function (i) {
 createProduct();
 
 function getRandomProduct() {
-  let index = Math.floor(Math.random() * oddDuckImages.length);
-  return allProducts[index];
+  let random = Math.floor(Math.random() * oddDuckImages.length);
+  return allProducts[random];
 }
 getRandomProduct();
 
 
 function makeRandomProductArray() {
-  while (currentProducts.length < 3) {
-    let currentProduct = getRandomProduct();
-    if (!currentProducts.includes(currentProduct)) {
-      currentProducts.push(currentProduct);
+  let productArray = [];
+  while (productArray.length < 3) {
+    let randomNumber = getRandomProduct();
+    if (!productArray.includes(randomNumber)) {
+      productArray.push(randomNumber);
     }
   }
-  return currentProducts;
+  return productArray;
 }
-console.log(currentProducts)
 
 let randomProducts = [];
 function randomRenderImage(){
@@ -61,8 +60,8 @@ function randomRenderImage(){
 randomRenderImage();
 
 function addClickHandler(i) {
-  let img = document.getElementById(`image-${i}`);
-  img.addEventListener("click",randomRenderImage);
+  let img = document.getElementById(`image${i}`);
+  img.addEventListener("click", randomRenderImage);
   allProducts[i].clicks++;
 }
 console.log(randomProducts)
