@@ -26,15 +26,10 @@ Product.prototype.render = function (i) {
   img.src = this.src;
 };
 
-
-
-
 function getRandomProduct() {
   let random = Math.floor(Math.random() * oddDuckImages.length);
   return allProducts[random];
 }
-
-
 
 function makeRandomProductArray() {
   let productArray = [];
@@ -58,13 +53,11 @@ function randomRenderImage(){
   }
 }
 
-
 function addClickHandler(i) {
   let img = document.getElementById(`image${i}`);
   img.addEventListener("click", randomRenderImage);
   allProducts[i].clicks++;
 }
-
 
 function renderList(){
   let divContainer = document.getElementById('data-list');
