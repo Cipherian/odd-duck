@@ -92,6 +92,12 @@ function randomRenderImage() {
     randomProduct.render(i);
   }
 }
+
+function clickHandler(n){
+  let img = document.getElementById(`image${n}`);
+  img.addEventListener('click', onClick);
+}
+
 function onClick(event) {
   let id = event.target.id;
   let currentClicks = 0;
@@ -147,6 +153,9 @@ function getData() {
 createProduct();
 getRandomProduct();
 randomRenderImage();
+clickHandler(0);
+clickHandler(1);
+clickHandler(2);
 for (let i = 0; i < allProducts.length; i++) {
   let product = allProducts[i];
   product.renderList();
