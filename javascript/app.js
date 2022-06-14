@@ -5,7 +5,6 @@ let oddDuckImages = ['pics/bag.jpg', 'pics/banana.jpg', 'pics/bathroom.jpg', 'pi
 
 
 let allProducts = [];
-let maxVotes = 5;
 
 function Product(name, src) {
   this.name = name;
@@ -14,26 +13,27 @@ function Product(name, src) {
   this.views = 0;
  allProducts.push(this);
 } 
+
+//for loop to create new products using names and images array
 function createProduct() {
   for(let i = 0;i < oddDuckNames.length;i++) {
   new Product(oddDuckNames[i], oddDuckImages[i])
   }
 }
-//render images
+
 Product.prototype.render = function (i) {
   let img = document.getElementById(`image${i}`);
   img.src = this.src;
 };
 
-//for loop to create new products using names and images array
 
-createProduct();
+
 
 function getRandomProduct() {
   let random = Math.floor(Math.random() * oddDuckImages.length);
   return allProducts[random];
 }
-getRandomProduct();
+
 
 
 function makeRandomProductArray() {
@@ -57,22 +57,29 @@ function randomRenderImage(){
     randomProduct.render(i);
   }
 }
-randomRenderImage();
+
 
 function addClickHandler(i) {
   let img = document.getElementById(`image${i}`);
   img.addEventListener("click", randomRenderImage);
   allProducts[i].clicks++;
 }
-console.log(randomProducts)
+
+
+function renderList(){
+  let divContainer = document.getElementById('data-list');
+
+  for(let i = 0; i < allProducts.length; i++) {
+    let product = allProducts[i];
+    let listItem = document.createElement('li');
+    listItem.innerText = `${product.name} was clicked ${product.clicks} times, and seen ${product.views} times.`;
+    divContainer.appendChild(listItem);
+  }
+}
+createProduct();
+getRandomProduct();
+randomRenderImage();
+renderList();
 addClickHandler(0);
 addClickHandler(1);
 addClickHandler(2);
-
-
-// Product.prototype.results = function() {
-//   let liCell = document.createElement('li');
-//   liCell.textContent = `${this.name} was clicked ${this.clicks }`
-// }
-
-// let retrievedProductsParsed = JSON.parse(localStorage.getItem('allProducts'));

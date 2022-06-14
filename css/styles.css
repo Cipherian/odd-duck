@@ -1,0 +1,24 @@
+html {
+  background-color:#FFE6E6;
+}
+#title {
+  display:flex;
+  justify-content: center;
+}
+h1 {
+  font-size: 3rem;
+}
+  main {
+    width: 80%;
+    margin: 10%;
+    height: 600px;
+  }
+  #OddDuckProducts {
+    display: flex;
+    justify-content: center;
+  }
+  img {
+    width: 250px;
+    height: 250px;
+    padding: 30px;
+  }
