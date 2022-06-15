@@ -42,7 +42,7 @@ let oddDuckImages = [
   "pics/water-can.jpg",
   "pics/wine-glass.jpg",
 ];
-
+let randomProducts = [];
 let allProducts = [];
 let totalClicks = 0;
 
@@ -62,14 +62,14 @@ function createProduct() {
 }
 
 Product.prototype.render = function (i) {
-  let img = document.getElementById(`image${i}`);
-  img.src = this.src;
-};
+    let img = document.getElementById(`image${i}`);
+    img.src = this.src;
+  };
 
-function getRandomProduct() {
-  let random = Math.floor(Math.random() * oddDuckImages.length);
-  return allProducts[random];
-}
+  function getRandomProduct() {
+    let random = Math.floor(Math.random() * oddDuckImages.length);
+    return allProducts[random];
+  }
 
 function makeRandomProductArray() {
   let productArray = [];
@@ -82,7 +82,7 @@ function makeRandomProductArray() {
   return productArray;
 }
 
-let randomProducts = [];
+
 function randomRenderImage() {
   randomProducts = makeRandomProductArray();
   for (let i = 0; i < randomProducts.length; i++) {
@@ -92,64 +92,101 @@ function randomRenderImage() {
     randomProduct.render(i);
   }
 }
+
+function clickHandler(n){
+  let img = document.getElementById(`image${n}`);
+  img.addEventListener('click', onClick);
+}
+
 function onClick(event) {
   let id = event.target.id;
   let currentClicks = 0;
-  let totalClicksAllowed = 10;
+  let totalClicksAllowed = 25;
   if (currentClicks === totalClicksAllowed) {
     for (let i = 0; i < 2; i++) {
       let img = document.getElementById(`image${i}`);
       img.removeEventListener("click", clickHandler);
     }
-    alert("Voting has ended, please View Results.");
+    alert("Voting has ended.");
   } else {
     currentClicks++;
     randomProducts[`${id[5]}`].clicks++;
+    console.log(currentClicks)
+    console.log(randomProducts);
     randomRenderImage();
   }
 }
 
-// function renderList() {
-//   let divContainer = document.getElementById("data-list");
-
-//   for (let i = 0; i < allProducts.length; i++) {
-//     let product = allProducts[i];
-//     let listItem = document.createElement("li");
-//     listItem.innerText = `${product.name} was clicked ${product.clicks} times, and seen ${product.views} times.`;
-//     divContainer.appendChild(listItem);
-//   }
-// }
 Product.prototype.onClick = function (i) {
   let img = document.getElementById(`image${i}`);
   img.addEventListener("click", onClick);
   };
 
-Product.prototype.renderList = function () {
-  let button = document.getElementById("results");
-  let listItem = document.createElement("li");
-  listItem.innerText = `${this.name} was clicked ${this.clicks} times, and seen ${this.views} times.`;
-  button.appendChild(listItem);
-};
-
 function saveData() {
-  let stringifyImages = JSON.stringify(allProducts);
-  localStorage.setItem("images", stringifyImages);
+  let stringifyData = JSON.stringify(allProducts);
+  localStorage.setItem("data", stringifyData);
 }
 
 function getData() {
   let newArray = [];
-  let returnedItems = localStorage.getItem("images");
+  let returnedItems = localStorage.getItem("data");
+  JSON.parse(returnedItems);
   newArray.push(returnedItems);
   console.log(newArray);
+}
+
+function renderChart () {
+  let ctx = document.getElementById("results").getContext("2d");
+
+  let labels = [];
+  let votes = [];
+  let views = [];
+
+  for (let i = 0; i < allProducts.length; i++) {
+    let product = allProducts[i];
+    labels.push(product.name);
+    votes.push(product.clicks);
+    views.push(product.views);
+  }
+
+  let myChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "# of Votes",
+          data: votes,
+          backgroundColor: ["rgba(255, 99, 132"],
+          borderColor: ["rgba(255, 99, 132"],
+          borderWidth: 1,
+        },
+        {
+          label: "# of Views",
+          data: views,
+          backgroundColor: ["rgba(54, 162, 235"],
+          borderColor: ["rgba(54, 162, 235"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          suggestedMax: 12,
+        },
+      },
+    },
+  });
 }
 
 //calling functions
 createProduct();
 getRandomProduct();
 randomRenderImage();
-for (let i = 0; i < allProducts.length; i++) {
-  let product = allProducts[i];
-  product.renderList();
-}
+clickHandler(0);
+clickHandler(1);
+clickHandler(2);
 saveData();
 getData();
