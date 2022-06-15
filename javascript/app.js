@@ -45,6 +45,10 @@ let oddDuckImages = [
 let randomProducts = [];
 let allProducts = [];
 let totalClicks = 0;
+let currentClicks = 0;
+let totalClicksAllowed = 25;
+let resultsButton = document.getElementById("results");
+resultsButton.addEventListener("click",renderChart);
 
 function Product(name, src) {
   this.name = name;
@@ -100,27 +104,21 @@ function clickHandler(n){
 
 function onClick(event) {
   let id = event.target.id;
-  let currentClicks = 0;
-  let totalClicksAllowed = 25;
   if (currentClicks === totalClicksAllowed) {
     for (let i = 0; i < 2; i++) {
       let img = document.getElementById(`image${i}`);
       img.removeEventListener("click", clickHandler);
+      saveData();
+      getData();
+      renderChart;
     }
     alert("Voting has ended.");
   } else {
     currentClicks++;
     randomProducts[`${id[5]}`].clicks++;
-    console.log(currentClicks)
-    console.log(randomProducts);
     randomRenderImage();
   }
 }
-
-Product.prototype.onClick = function (i) {
-  let img = document.getElementById(`image${i}`);
-  img.addEventListener("click", onClick);
-  };
 
 function saveData() {
   let stringifyData = JSON.stringify(allProducts);
@@ -136,7 +134,8 @@ function getData() {
 }
 
 function renderChart () {
-  let ctx = document.getElementById("results").getContext("2d");
+  let ctx = document.getElementById("resultsChart").getContext("2d");
+  ctx.addEventListener
 
   let labels = [];
   let votes = [];
@@ -157,15 +156,15 @@ function renderChart () {
         {
           label: "# of Votes",
           data: votes,
-          backgroundColor: ["rgba(255, 99, 132"],
-          borderColor: ["rgba(255, 99, 132"],
+          backgroundColor: ["rgba(233, 99, 132"],
+          borderColor: ["rgba(222, 99, 132"],
           borderWidth: 1,
         },
         {
           label: "# of Views",
           data: views,
           backgroundColor: ["rgba(54, 162, 235"],
-          borderColor: ["rgba(54, 162, 235"],
+          borderColor: ["rgba(54, 155, 235"],
           borderWidth: 1,
         },
       ],
@@ -188,5 +187,4 @@ randomRenderImage();
 clickHandler(0);
 clickHandler(1);
 clickHandler(2);
-saveData();
 getData();
